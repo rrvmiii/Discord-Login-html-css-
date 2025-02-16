@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@600&display=swap');
+
+.grey-big-box {
+    background-color: #36393e;
+    border-radius: 7px;
+    align-self: center;
+    width: 785px;
+    height: 450px;
+    position: absolute;
+    top: 20%;
+    left: 50%; 
+    transform: translateX(-50%);
+    font-family: 'Cabin', sans-serif;
+}
+
+body {
+    background-image: url("background.png");
+}
+
+.go-back {
+    color: aliceblue;
+    margin-left: 30px;
+    padding-top: 20px;
+}
+
+.welcome-back-heading {
+    color: aliceblue;
+    margin-left: 160px;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.we-excited-text {
+    color: rgba(240, 248, 255, 0.495);
+    margin-left: 135px;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.entering-email-or-phone-number {
+    color: #babbbd;
+    font-size: 12px;
+    margin-left: 30px; 
+    margin-bottom: 5px; 
+}
+
+.red-ash {
+    color: rgb(247, 73, 73);
+}
+
+.input-email-or-phone-number,
+.input-password {
+    width: 420px;
+    height: 40px;
+    background-color: #282b30;
+    color: white; /* تغيير لون النص إلى الأبيض */
+    padding-left: 10px;
+    border: none;
+    margin-left: 30px;
+}
+
+/* التأكد من أن النص المكتوب داخل الحقول يظل أبيض حتى عند التحديد */
+.input-email-or-phone-number::placeholder,
+.input-password::placeholder {
+    color: rgba(255, 255, 255, 0.6); /* لون placeholder أبيض شفاف */
+}
+
+.entering-password { 
+    color: #babbbd;
+    margin-left: 30px;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.forgot-password {
+    margin-left: 30px;
+    margin-top: 7px;
+}
+
+.login-button {
+    width: 430px;
+    height: 45px;
+    margin-left: 30px;
+    background-color: #5865f2;
+    color: white;
+    border: none;
+    margin-top: 7px;
+    cursor: pointer;
+}
+
+.need-an-account {
+    margin-left: 30px;
+    color: rgba(240, 248, 255, 0.495);
+    font-size: 11px;
+}
+
+.right-section {
+    color: aliceblue;
+    margin-top: -340px;
+    margin-left: 530px;
+}
+
+.login-with-qr-code {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.scan-to-login-text {
+    font-size: 17px;
+    color: rgba(240, 248, 255, 0.495);
+    margin-left: -15px;
+    margin-top: 11px;
+}
+
+.image {
+    width: 170px;
+    height: 170px;
+    border-radius: 5px;
+    margin-left: 20px;
+}

